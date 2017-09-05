@@ -151,8 +151,8 @@ Contains the core LSTM units for encoding/decoding.
 Contains a trainer for training the answer chunker model.
 
 **bidaf**
-Contains the necessary code for training a reading comprehension model. This code is heavily based on the [Bi-directional Attention Flow for Machine Comprehension repository][bidaf] (thanks to authors for releasing their code!)
+Contains the necessary code for training a reading comprehension model. This code is heavily based on the [Bi-directional Attention Flow for Machine Comprehension repository](bidaf) (thanks to authors for releasing their code!)
 
 [maluuba]: https://github.com/Maluuba/newsqa
 [cnn_stories]: http://cs.nyu.edu/~kcho/DMQA/
-[bidaf][https://github.com/allenai/bi-att-flow]
+[bidaf]: https://github.com/allenai/bi-att-flow
