@@ -60,11 +60,11 @@ and run
 ```
 # Now run training with squad and old dataset
 python3 -m basic.cli \
---run_id 21 \
+--run_id 22 \
 --shared_path out/basic/06/shared.json \
 --load_path out/basic/06/save/basic-40000 \
 --sup_unsup_ratio 5 \
---load_ema False --gpu_idx 3 \
+--load_ema False --gpu_idx 0 \
 --mode train --data_dir newsqa_unsupervised_old \
 --len_opt --batch_size 24 --num_steps 14000 \
 --eval_period 1000 --save_period 1000 \
