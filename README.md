@@ -97,12 +97,6 @@ python3 newsqa/evaluate.py newsqa/data_test.json new_results_30.json
 
 (running this command on my machine, this gives approximately ~30.5 EM and 44.5 F1 performance).
 
-**Question Generation**
-```
-cd bidaf && python3 -m tests.create_generation_dataset_unsupervised
-cd ../
-cp datasets/newsqa_unsupervised/train/inputs.txt datasets/newsqa_unsupervised_large/train/inputs.txt
-```
 
 To run several of our logs, please execute:
 ```
@@ -123,7 +117,13 @@ $ python3 -m tests.iob_trainer_test
 A pre-trained BIDAF SQuAD model can be found at bidaf/out/basic/06/save/*
 Synthetic question, answer pair datasets can be found at bidaf/newsqa_unsupervised_old (better performance) and bidaf/newsqa_unsupervised_old_verb_filtered (worse performance) 
 
-For all the logs for our reported runs, see https://github.com/davidgolub/ReadingComprehension/
+**Question Generation**
+Please note, to use a question generation network on SQuAD to generate questions on NewsQA, you must first create an inputs.txt file which corresponds to the paragraphs in CNN/Daily Mail. For legal reasons we can't provide it as part of the repository. To create them, please run
+```
+cd bidaf && python3 -m tests.create_generation_dataset_unsupervised
+cd ../
+cp datasets/newsqa_unsupervised/train/inputs.txt datasets/{NEWSQA_DATASET_OF_YOUR_CHOICE}/train/inputs.txt
+```
 
 Code Organization
 -----
