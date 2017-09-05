@@ -128,7 +128,7 @@ For all the logs for our reported runs, see https://github.com/davidgolub/Readin
 Code Organization
 -----
 **datasets**
-Contains sample datasets used to train the model. C.f. datasets/newsqa_unsupervised. Each dataset needs to have a vocab.txt file, inputs.txt, outputs.txt etc.  
+Contains sample datasets used to train the model. C.f. datasets/question_generation. Each dataset needs to have a vocab.txt file, inputs.txt, outputs.txt etc.  
 
 **data_loaders**
 Contains code to load a dataset from a directory into memory, and generate batches of examples to train/validate a model.
