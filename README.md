@@ -52,12 +52,51 @@ For a preliminary example of how to extract answers (currently NER), generate qu
 ./scripts.sh. 
 ```
 
-** Note: to get the required data to generate questions on NewsQA, you must copy the preprocessed NewsQA dataset by running
+For an example of how to finetune a BiDAF model trained on SQuAD on NewsQA using our old logs, please follow the instructions in 
 ```
-cd bidaf && python3 -m tests.create_generation_dataset_unsupervised
-cd ../
-cp datasets/newsqa_unsupervised/train/inputs.txt datasets/newsqa_unsupervised_large/train/inputs.txt
+./scripts.sh
 ```
+and run 
+```
+# Now run training with squad and old dataset
+python3 -m basic.cli \
+--run_id 21 \
+--shared_path out/basic/06/shared.json \
+--load_path out/basic/06/save/basic-40000 \
+--sup_unsup_ratio 5 \
+--load_ema False --gpu_idx 3 \
+--mode train --data_dir newsqa_unsupervised_old \
+--len_opt --batch_size 24 --num_steps 14000 \
+--eval_period 1000 --save_period 1000 \
+--sent_size_th 800 --para_size_th 800
+
+for i in 41 42 43 44 45 46 47 48 49 50 51 52 53 54;
+do
+    python3 -m basic.cli \
+    --run_id 22 \
+    --shared_path out/basic/06/shared.json \
+    --load_path "out/basic/22/save/basic-"$i"000" \
+    --k 10 \
+    --use_special_token False \
+    --load_ema False --gpu_idx 3 \
+    --mode test --data_dir newsqa \
+    --len_opt --batch_size 15 --num_steps 40000 \
+    --eval_period 1000 --save_period 1000 \
+    --sent_size_th 2100 --para_size_th 2100
+done
+
+eargs=""
+model_id=22
+for num in 41 42 43 44 45 46 47 48 49 51; do
+    eval_path="out/basic/${model_id}/eval/test-0${num}000.pklz"
+    eargs="$eargs $eval_path"
+done
+python3 -m basic.ensemble --data_path newsqa/data_test.json --shared_path newsqa/shared_test.json -o new_results_30.json $eargs
+python3 newsqa/evaluate.py newsqa/data_test.json new_results_30.json
+```
+
+(running this command on my machine, this gives approximately ~30.5 EM and 44.5 F1 performance).
+
 
 To run several of our logs, please execute:
 ```
@@ -78,12 +117,18 @@ $ python3 -m tests.iob_trainer_test
 A pre-trained BIDAF SQuAD model can be found at bidaf/out/basic/06/save/*
 Synthetic question, answer pair datasets can be found at bidaf/newsqa_unsupervised_old (better performance) and bidaf/newsqa_unsupervised_old_verb_filtered (worse performance) 
 
-For all the logs for our reported runs, see https://github.com/davidgolub/ReadingComprehension/
+**Question Generation**
+Please note, to use a question generation network on SQuAD to generate questions on NewsQA, you must first create an inputs.txt file which corresponds to the paragraphs in CNN/Daily Mail. For legal reasons we can't provide it as part of the repository. To create them, please run
+```
+cd bidaf && python3 -m tests.create_generation_dataset_unsupervised
+cd ../
+cp datasets/newsqa_unsupervised/train/inputs.txt datasets/{NEWSQA_DATASET_OF_YOUR_CHOICE}/train/inputs.txt
+```
 
 Code Organization
 -----
 **datasets**
-Contains sample datasets used to train the model. C.f. datasets/newsqa_unsupervised. Each dataset needs to have a vocab.txt file, inputs.txt, outputs.txt etc.  
+Contains sample datasets used to train the model. C.f. datasets/question_generation. Each dataset needs to have a vocab.txt file, inputs.txt, outputs.txt etc.  
 
 **data_loaders**
 Contains code to load a dataset from a directory into memory, and generate batches of examples to train/validate a model.
@@ -106,7 +151,8 @@ Contains the core LSTM units for encoding/decoding.
 Contains a trainer for training the answer chunker model.
 
 **bidaf**
-Contains a pretrained Reading Comprehension model
+Contains the necessary code for training a reading comprehension model. This code is heavily based on the [Bi-directional Attention Flow for Machine Comprehension repository](bidaf) (thanks to authors for releasing their code!)
 
 [maluuba]: https://github.com/Maluuba/newsqa
 [cnn_stories]: http://cs.nyu.edu/~kcho/DMQA/
+[bidaf]: https://github.com/allenai/bi-att-flow
