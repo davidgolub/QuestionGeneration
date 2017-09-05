@@ -205,7 +205,7 @@ do
 done
 
 eargs=""
-model_id=21
+model_id=22
 for num in 41 42 43 44 45 46 47 48 49 51; do
     eval_path="out/basic/${model_id}/eval/test-0${num}000.pklz"
     eargs="$eargs $eval_path"

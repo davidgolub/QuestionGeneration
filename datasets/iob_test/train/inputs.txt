@@ -1,10 +1,3 @@
-The cat ran over the board
-The cat ran quickly over the board 1 2 3
-The cat ran over the board
-The cat ran quickly over the board 1 2 3
-The cat ran over the board
-The cat ran quickly over the board 1 2 3
-The cat ran over the board
-The cat ran quickly over the board 1 2 3
-The cat ran over the board
-The cat ran quickly over the board 1 2 3
+version https://git-lfs.github.com/spec/v1
+oid sha256:ed0525e09813b3b5c00dcf14d5ad24a046687f803862acd21443b3941bc2ff1a
+size 339
