@@ -56,7 +56,7 @@ For an example of how to finetune a BiDAF model trained on SQuAD on NewsQA using
 ```
 ./scripts.sh
 ```
-and run 
+and from the bidaf directory run 
 ```
 # Now run training with squad and old dataset
 python3 -m basic.cli \
