@@ -18,6 +18,12 @@ python3 newsqa/evaluate.py newsqa/data_test.json double_model.json
 echo "Answer oracle with context for question generation, single model"
 python3 newsqa/evaluate.py newsqa/data_test.json context_aoracle.json
 
+echo "Single BiDAF model finetuned on NewsQA 4k steps"
+python3 newsqa/evaluate.py newsqa/data_test.json "single_model_results_44.json"
+
+echo "Single BiDaf finetuned on NewsQA 4k steps ensembled w. baseline results"
+python3 newsqa/evaluate.py newsqa/data_test.json "single_model_result_run_44_with_baseline.json"
+
 # Evaluate single model result of BiDAF finetuned on NewsQA
 echo "Single BiDAF model finetuned on NewsQA results"
 for num in 42 43 44 45 46 47 48 49; do
