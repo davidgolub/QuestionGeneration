@@ -1,4 +1,4 @@
-newsqa_import json 
+import json 
 from squad.utils import get_2d_spans
 from helpers import utils
 from helpers import spacy_tokenizer
