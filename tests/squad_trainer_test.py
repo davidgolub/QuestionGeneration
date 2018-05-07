@@ -6,8 +6,6 @@ from models.language_trainer import LanguageTrainer
 from models.language_wrapper import LanguageWrapper 
 from helpers import constants, torch_utils, io_utils
 
-torch.cuda.set_device(1)
-
 base_path = 'datasets/squad/'
 language_model_loader = LanguageModelLoader(base_path, tokenizer_type=constants.TOKENIZER_TAB)
 
