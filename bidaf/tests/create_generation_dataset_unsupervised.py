@@ -49,3 +49,16 @@ def create_dataset(save_dir, data_path, shared_path):
 create_dataset(save_dir='../datasets/newsqa_unsupervised/',
 data_path='newsqa/data_train.json',
 shared_path='newsqa/shared_train.json')
+
+create_dataset(save_dir='../datasets/newsqa_unsupervised/train',
+data_path='newsqa/data_train.json',
+shared_path='newsqa/shared_train.json')
+
+create_dataset(save_dir='../datasets/newsqa_unsupervised/validation',
+data_path='newsqa/data_validation.json',
+shared_path='newsqa/shared_validation.json')
+
+create_dataset(save_dir='../datasets/newsqa_unsupervised/test',
+data_path='newsqa/data_test.json',
+shared_path='newsqa/shared_test.json')
+
