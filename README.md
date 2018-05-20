@@ -51,11 +51,13 @@ For a preliminary example of how to extract answers (currently NER), generate qu
 ```
 ./scripts.sh. 
 ```
+lines 1-70.
 
 For an example of how to finetune a BiDAF model trained on SQuAD on NewsQA using our old logs, please follow the instructions in 
 ```
 ./scripts.sh
 ```
+lines 70-onward
 and from the bidaf directory run 
 ```
 # Now run training with squad and old dataset
