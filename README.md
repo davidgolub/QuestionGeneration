@@ -9,6 +9,8 @@ The question-generation network takes in a passage, extracts answer spans from t
 
 Finally, we also provide several logs from our experiments for single-model, two-model results, and gold answer finetuning under logs/results.
 
+Note: If git LFS doesn't work, please download the "git-lfsed" version of the repository here: https://drive.google.com/file/d/1OZrW7ZojGZS9P9J7G_dT-gsPazZlY9Sl/view?usp=sharing.
+
 Prerequisites
 -------------
 - Git LFS
